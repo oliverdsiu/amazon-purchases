@@ -1,0 +1,70 @@
+File descriptions
+
+
+The data come from a survey / study conducted on approximately 5000 Amazon customers from January 2018 to December 2022.
+
+For the competition, approximately half of the customers were randomly selected to be in the training set and the other half were selected to be in the test set.
+
+customer_info_test
+customer_info_train
+These two files contain information about the customers in the training and test sets.
+
+amazon_order_details_test
+amazon_order_details_train
+These two files contain information about individual items and orders. 
+The training data contain the item title, item ID number, as well as cost information.
+The test data only contains the category of each item.
+
+train
+This the primary training file. It is a summary of how many customers and orders were placed in a particular state, during a particular month and year. The response variable is log_total, which is log10 of order_totals. order_totals was calculated by totaling the cost of items int he amazon_order_details files.
+
+For example the order_totals value for Alabama 2018 01 was found by finding all customers who said they live in Alabama and placed an order in January 2018. The cost of each item multiplied by the quantity of items was summed.
+
+Months where the order total for a particular state has less than 100 were removed.
+
+Other variables are calculated by counting information of the individuals who placed orders.
+
+count - total number of orders placed
+
+count_female - number of orders placed by those who responded female to survey question
+
+count_less5 - number of orders placed by those who responded "place less than 5 orders per month on Amazon"
+count_5to10 - "5 to 10 orders per month on Amazon"
+count_over10 - "over 10 orders per month on Amazon"
+
+household size variables
+count_hh1 - household size = 1
+count_hh2 - household size = 2
+count_hh3 - household size = 3
+count_hh4 - household size = 4+
+
+account sharing variables
+count_howmany1 - how many people in the household use/share the amazon account = 1
+count_howmany2 - how many people in the household use/share the amazon account = 2
+count_howmany3 - how many people in the household use/share the amazon account = 3
+count_howmany4 - how many people in the household use/share the amazon account = 4
+
+customer age variables
+count_1824 - age 18-24
+count_2534
+count_3544
+count_4554
+count_5564
+count_65up
+
+customer income variables
+count_und25k - under 25k
+count_2549k - 25k to 49k
+count_5074k 
+count_7599k
+count_100149k - 100k to 149k	
+count_150kup - over 150k
+
+customer education variables
+count_lessHS - less than HS
+count_HS - HS diploma
+count_B - Bachelor's degree
+count_G - graduate / professional degree
+
+test.csv
+test carries the same information as train with variables order_totals and log_total removed. The response variable you are trying to predict is log_total

@@ -1,0 +1,115 @@
+---
+title: "Stats 101C - Regression Project EDA"
+author: "Oliver D Siu -- 406146080"
+date: "`r format(Sys.Date(), '%D')`"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 4
+    toc_float: yes
+    code_folding: show
+  pdf_document: default
+---
+
+## 1. Sourcing
+
+```{r}
+library(tidyverse)
+library(tidymodels)
+tidymodels_prefer()
+
+train <- read_csv("train.csv")
+```
+
+## 2. Plots
+
+### a) Data Setup
+
+```{r}
+train <-
+  train %>%
+  mutate(q_demos_state  = factor(q_demos_state),
+         year = factor(year),
+         month = factor(month))
+
+var_names <- colnames(train)[-5]
+log_var_names <- var_names[!var_names %in% c("q_demos_state", "year", "month")]
+```
+
+### b) No Transform
+
+```{r, cache = TRUE}
+par(mfrow = c(2, 2))
+for(i in var_names) {
+  plot(train$order_totals ~ train[[i]],
+       ylab = "order_totals",
+       xlab = i)
+}
+```
+
+### c) Standard Plot
+
+```{r, cache = TRUE}
+par(mfrow = c(2, 2))
+for(i in var_names) {
+  plot(train$log_total ~ train[[i]],
+       ylab = "log_total",
+       xlab = i)
+}
+```
+
+### d) Log Transformation
+
+```{r, cache = TRUE}
+par(mfrow = c(2, 2))
+for(i in log_var_names) {
+  plot(train$log_total ~ log(train[[i]]),
+       ylab = "log_total",
+       xlab = i)
+}
+```
+
+### e) Correlation Matrix
+
+```{r}
+train_cor <- train %>% select(- c("q_demos_state", "year", "month"))
+cor(train_cor)
+```
+
+## 3. Config Final Output
+
+### a) Log Transform
+
+```{r, cache = TRUE}
+par(mfrow = c(2, 4))
+for(i in log_var_names) {
+  plot(train$log_total ~ log(train[[i]]),
+       main = i,
+       ylab = "log_total",
+       xlab = i)
+}
+```
+
+### b) Histogram
+
+```{r, cache = TRUE}
+par(mfrow = c(2, 4))
+for(i in log_var_names) {
+  hist(log(train[[i]]),
+       main = i,
+       xlab = i,
+       ylab = "log_total",
+       col = "darkviolet")
+}
+```
+
+### c) Counts Check
+
+```{r}
+sum(train$count_lessHS)
+sum(train$count_HS)
+sum(train$count_B)
+sum(train$count_G)
+```
+
+ 
