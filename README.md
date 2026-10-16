@@ -8,5 +8,5 @@ Raw purchase histories and survey data are not included in this repo due to size
 
 ## Links
 
-- [Project Report](https://github.com/oliversiu/amazon-purchases/blob/main/docs/Report.pdf)
+- [Project Report](https://github.com/oliverdsiu/amazon-purchases/blob/main/docs/Report.pdf)
 - [Project Overview](https://oliversiu.netlify.app/projects/project_07/project_07)
